@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: debug
+
+spring:
+  datasource:
+    url: jdbc:mysql://XXX:3306/template?useSSL=false&createDatabaseIfNotExist=true&autoReconnect=true&useUnicode=true&characterEncoding=UTF8
+    username: dev
+    password: L9BPPctD
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+

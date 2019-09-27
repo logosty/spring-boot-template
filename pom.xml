@@ -6,7 +6,13 @@
 
   <groupId>com.logosty</groupId>
   <artifactId>spring-boot-template</artifactId>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>template.server</module>
+    <module>template.common</module>
+    <module>template.admin</module>
+  </modules>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -24,6 +30,16 @@
     <mapstruct.version>1.3.0.Final</mapstruct.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.logosty</groupId>
+        <artifactId>template.common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -34,6 +50,16 @@
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
       <version>${mapstruct.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.60</version>
     </dependency>
   </dependencies>
 

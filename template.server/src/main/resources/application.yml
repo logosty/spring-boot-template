@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  max-http-header-size: 20480
+
+spring:
+  application:
+    name: ${env}-templeta-server
+  profiles:
+    active: ${env:dev}
+  jpa:
+    properties:
+      hibernate:
+        dialect:
+          com.logosty.template.common.config.MysqlConfig
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
