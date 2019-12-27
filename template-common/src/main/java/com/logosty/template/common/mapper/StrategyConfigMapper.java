@@ -15,7 +15,7 @@ import org.mapstruct.Mappings;
 public interface StrategyConfigMapper extends BaseMapper {
 
   @Mappings(value = {
-      @Mapping(target = "creation", expression = "java(dateToLong(strategy.getCreation()))"),
+      @Mapping(target = "creation", source = "strategy.creation"),
       @Mapping(target = "id", source = "strategy.id"),
       @Mapping(target = "version", source = "strategy.version"),
       @Mapping(target = "modification", ignore = true),
