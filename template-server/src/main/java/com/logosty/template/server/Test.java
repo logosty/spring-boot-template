@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -12,12 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Test {
 
-//  public static final String root = "/Volumes/Untitled/视频";
+  public static final String test = "/Volumes/Untitled/视频";
 
   public static final String root = "/Volumes/Untitled/";
 
-  public static final String test = "/Volumes/Untitled/test";
-  static int global = 1000;
+//  public static final String test = "/Volumes/Untitled/test";
+  static int global = 1;
+
+  static Pattern p = Pattern.compile("^((\\d+\\.)+)(.*\\..*$)");
 
   public static void main(String[] args) throws IOException {
     String fileName = test;
@@ -37,8 +42,8 @@ public class Test {
     if (!newF.exists()) {
       newF.createNewFile();
     } else {
-      oldF.delete();
-      oldF.createNewFile();
+      newF.delete();
+      newF.createNewFile();
     }
 
     try (
@@ -60,10 +65,13 @@ public class Test {
     if (f.isDirectory()) {
       File[] fileArray = f.listFiles();
       if (fileArray != null) {
+        Arrays.sort(fileArray);
         //目录
+        oldWritter.newLine();
         oldWritter.append(f.getName());
         oldWritter.newLine();
 
+        newWritter.newLine();
         newWritter.append(f.getName());
         newWritter.newLine();
 
@@ -75,7 +83,17 @@ public class Test {
     } else {
       System.out.println(f);
       int num = global++;
-      String newName = f.getParent() + File.separator + num + "." + f.getName();
+      String formatNum = String.format("%0" + 3 + "d", num);
+
+      String name = f.getName();
+
+      Matcher matcher = p.matcher(name);
+      if (matcher.find() && matcher.groupCount() > 2) {
+        name = matcher.group(3);
+      }
+
+      String newName = f.getParent() + File.separator + formatNum + "." + name;
+
       File newFile = new File(newName);
       //目录
       oldWritter.append(f.getName());
